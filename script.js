@@ -124,7 +124,7 @@ function checkoutWhatsApp() {
     }
 
     let phone = "966500000000"; // Update with your Saudi / target WhatsApp number
-    let message = "Hi Nova Atelier! I would like to place an order:%0A%0A";
+    let message = "Hi Nova Store! I would like to place an order:%0A%0A";
     let total = 0;
 
     cart.forEach((item, i) => {
