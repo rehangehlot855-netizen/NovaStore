@@ -8,29 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><style>
-/* Header Emergency Mobile Fix */
-@media screen and (max-width: 768px) {
-    header, nav, .navbar {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        padding: 10px !important;
-        gap: 8px !important;
-    }
-
-    nav a, .nav-links a {
-        display: inline-block !important;
-        font-size: 11px !important;
-        margin: 4px 6px !important;
-        letter-spacing: 1px !important;
-    }
-
-    .logo {
-        margin-bottom: 5px !important;
-    }
-}
-</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -50,68 +28,49 @@
         <div class="header-icons">
             <div class="cart-icon" onclick="toggleCart()">
                 <i class="fa-solid fa-bag-shopping"></i>
-                <span id="cart-count">0</span>
+                <span class="cart-count" id="cart-count">0</span>
             </div>
         </div>
     </header>
 
-    <!-- Luxury Hero Banner -->
-    <section class="hero" id="home">
-        <div class="hero-overlay">
-            <p class="subtitle">AUTUMN / WINTER 2026</p>
-            <h1>HAUTE COUTURE</h1>
-            <a href="#products" class="btn-primary">EXPLORE THE SELECTION</a>
-        </div>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <p>AUTUMN / WINTER 2026</p>
+        <h1>HAUTE COUTURE</h1>
+        <a href="#products" class="btn-hero">Explore The Selection</a>
     </section>
 
-    <!-- Main Products Section -->
-    <section class="products-section" id="products">
-        <p class="section-tag">CURATED COLLECTION</p>
-        <h2>Signature Pieces</h2>
-        <div class="gold-divider"></div>
+    <!-- Products Section -->
+    <section id="products" class="products-section">
+        <h2 class="section-title">Curated Collection</h2>
         <div class="product-grid" id="product-grid">
-            <!-- Dynamic Products will render here -->
+            <!-- Products will load dynamically via JS -->
         </div>
     </section>
 
     <!-- Admin Section -->
-    <section class="admin-section" id="admin">
+    <section id="admin" class="admin-section">
         <div class="admin-card">
             <h2>Add Exclusive Item</h2>
-            <p class="admin-sub">Catalog Management</p>
-            <form id="add-product-form" onsubmit="handleFormSubmit(event)">
-                <input type="text" id="p-name" placeholder="Product Title (e.g. Royal Silk Kaftan)" required>
-                <input type="number" id="p-price" placeholder="Price in SAR" step="1" required>
-                <input type="text" id="p-img" placeholder="Image URL (Unsplash / Web link)" required>
-                <button type="submit" class="admin-btn">PUBLISH TO STORE</button>
+            <p class="admin-subtitle">Catalog Management</p>
+            <form id="add-product-form" class="admin-form">
+                <input type="text" id="p-title" placeholder="Product Title (e.g. Royal Silk Kaftan)" required>
+                <input type="number" id="p-price" placeholder="Price in SAR" required>
+                <input type="url" id="p-image" placeholder="Image URL (Unsplash / Web link)" required>
+                <button type="submit" class="btn-publish">Publish To Store</button>
             </form>
         </div>
     </section>
 
-    <!-- Slide-in Cart Sidebar -->
-    <div class="cart-sidebar" id="cart-sidebar">
-        <div class="cart-header">
-            <h3>YOUR SHOPPING BAG</h3>
-            <span class="close-btn" onclick="toggleCart()">&times;</span>
-        </div>
-        <div class="cart-items" id="cart-items">
-            <p class="empty-msg">Your bag is currently empty.</p>
-        </div>
-        <div class="cart-footer">
-            <div class="total-row">
-                <span>Total Amount:</span>
-                <h4><span id="cart-total">0</span> SAR</h4>
-            </div>
-            <button class="checkout-btn" onclick="checkoutWhatsApp()">
-                <i class="fa-brands fa-whatsapp"></i> ORDER VIA WHATSAPP
-            </button>
-        </div>
-    </div>
-
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/966571116528?text=Hi%20Nova%20Store!" class="whatsapp-float" target="_blank" title="VIP Concierge">
+    <a href="https://wa.me/966500000000" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 NOVA STORE. All Rights Reserved.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
