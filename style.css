@@ -1,399 +1,258 @@
+/* ==========================================
+   1. GLOBAL STYLES & RESET
+   ========================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-    scroll-behavior: smooth;
+    font-family: 'Playfair Display', serif, sans-serif;
 }
 
 body {
-    background-color: #fafafa;
+    background-color: #fcfbf9;
     color: #1a1a1a;
+    line-height: 1.6;
 }
 
-/* Announcement Bar */
-.top-bar {
+/* ==========================================
+   2. ANNOUNCEMENT BAR
+   ========================================== */
+.announcement-bar {
     background-color: #0d0d0d;
-    color: #c5a059;
+    color: #d4af37;
     text-align: center;
-    padding: 10px 0;
-    font-size: 10px;
-    letter-spacing: 3px;
-    font-weight: 500;
+    padding: 8px 15px;
+    font-size: 11px;
+    letter-spacing: 2px;
     text-transform: uppercase;
+    font-weight: 600;
 }
 
-/* Navbar */
+/* ==========================================
+   3. NAVIGATION BAR
+   ========================================== */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 22px 8%;
-    background: #ffffff;
+    padding: 20px 5%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eaeaea;
     position: sticky;
     top: 0;
-    z-index: 100;
-    border-bottom: 1px solid #eaeaea;
+    z-index: 1000;
 }
 
 .logo {
-    font-family: 'Cinzel', serif;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 700;
-    letter-spacing: 4px;
-    color: #111;
+    letter-spacing: 3px;
+    text-decoration: none;
+    color: #1a1a1a;
 }
 
 .logo span {
-    font-weight: 400;
-    color: #c5a059;
+    color: #d4af37;
+    font-weight: 300;
 }
 
 .nav-links a {
-    color: #222;
     text-decoration: none;
-    margin: 0 25px;
-    font-size: 11px;
-    letter-spacing: 2.5px;
+    color: #333333;
+    margin: 0 15px;
+    font-size: 12px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    font-weight: 500;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #c5a059;
+    color: #d4af37;
 }
 
 .cart-icon {
-    font-size: 20px;
     position: relative;
     cursor: pointer;
-    color: #111;
+    font-size: 18px;
 }
 
-#cart-count {
-    background-color: #c5a059;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 7px;
-    font-size: 10px;
-    font-weight: 600;
+.cart-count {
     position: absolute;
     top: -8px;
     right: -10px;
+    background-color: #d4af37;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
 }
 
-/* Luxury Hero Banner */
+/* ==========================================
+   4. HERO SECTION
+   ========================================== */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), 
-                url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600&auto=format&fit=crop');
+    height: 80vh;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1500&q=80');
     background-size: cover;
-    background-position: center 30%;
-    height: 85vh;
+    background-position: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: white;
+    padding: 0 20px;
 }
 
-.subtitle {
-    letter-spacing: 5px;
-    font-size: 12px;
-    color: #e5c178;
-    margin-bottom: 12px;
+.hero p {
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    color: #d4af37;
 }
 
 .hero h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 56px;
-    font-weight: 600;
-    letter-spacing: 6px;
-    margin-bottom: 30px;
+    font-size: 52px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
 }
 
-.btn-primary {
+.btn-hero {
     display: inline-block;
-    padding: 16px 40px;
-    background-color: transparent;
-    color: #fff;
-    border: 1px solid #c5a059;
+    padding: 12px 30px;
+    border: 1px solid #d4af37;
+    color: white;
     text-decoration: none;
     font-size: 11px;
-    letter-spacing: 3px;
-    font-weight: 600;
-    transition: all 0.4s ease;
-}
-
-.btn-primary:hover {
-    background-color: #c5a059;
-    color: #0d0d0d;
-}
-
-/* Products Section */
-.products-section {
-    padding: 90px 8%;
-    text-align: center;
-}
-
-.section-tag {
-    font-size: 10px;
-    letter-spacing: 4px;
-    color: #c5a059;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-}
-
-.products-section h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 36px;
-    font-weight: 500;
     letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
 }
 
-.gold-divider {
-    width: 50px;
-    height: 2px;
-    background-color: #c5a059;
-    margin: 15px auto 50px;
+.btn-hero:hover {
+    background-color: #d4af37;
+    color: black;
+}
+
+/* ==========================================
+   5. PRODUCTS SECTION
+   ========================================== */
+.products-section {
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
 }
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
 }
 
 .product-card {
-    background: #fff;
-    text-align: center;
-    padding-bottom: 20px;
+    background: white;
     border: 1px solid #f0f0f0;
-    transition: all 0.4s ease;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .product-card:hover {
-    box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 
-.img-wrapper {
-    overflow: hidden;
-    position: relative;
-    height: 420px;
-    margin-bottom: 20px;
-}
-
-.product-card img {
+.product-image {
     width: 100%;
-    height: 100%;
+    height: 380px;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    margin-bottom: 15px;
 }
 
-.product-card:hover img {
-    transform: scale(1.06);
-}
-
-.product-card h3 {
-    font-family: 'Cinzel', serif;
-    font-size: 16px;
-    font-weight: 600;
+.product-title {
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     margin-bottom: 8px;
-    letter-spacing: 1px;
-    color: #111;
 }
 
-.price {
-    color: #c5a059;
-    font-size: 15px;
+.product-price {
+    font-size: 13px;
+    color: #d4af37;
     font-weight: 600;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
+    margin-bottom: 15px;
 }
 
-.add-to-cart-btn {
-    width: 85%;
-    padding: 13px;
-    border: 1px solid #111;
-    background: transparent;
-    color: #111;
+.btn-add {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    border: 1px solid #1a1a1a;
+    color: #1a1a1a;
     font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
 }
 
-.add-to-cart-btn:hover {
-    background-color: #111;
-    color: #c5a059;
-    border-color: #111;
+.btn-add:hover {
+    background-color: #1a1a1a;
+    color: white;
 }
 
-/* Luxury Admin Section */
+/* ==========================================
+   6. ADMIN FORM SECTION
+   ========================================== */
 .admin-section {
-    padding: 60px 8%;
+    padding: 50px 5%;
     background-color: #f4f4f4;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 50px;
 }
 
-.admin-card {
-    background: #fff;
-    padding: 40px;
-    max-width: 900px;
+.admin-form {
+    max-width: 500px;
     margin: 0 auto;
-    border: 1px solid #eaeaea;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-}
-
-.admin-card h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 24px;
-    margin-bottom: 5px;
-}
-
-.admin-sub {
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: #888;
-    margin-bottom: 25px;
-    text-transform: uppercase;
-}
-
-#add-product-form {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 15px;
 }
 
-#add-product-form input {
-    padding: 14px;
-    border: 1px solid #ddd;
-    outline: none;
+.admin-form input, .admin-form button {
+    padding: 12px;
+    border: 1px solid #cccccc;
     font-size: 12px;
-    transition: border 0.3s;
 }
 
-#add-product-form input:focus {
-    border-color: #c5a059;
-}
-
-.admin-btn {
-    padding: 14px;
-    background-color: #111;
-    color: #c5a059;
-    border: none;
-    text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 2px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.admin-btn:hover {
-    background-color: #c5a059;
-    color: #111;
-}
-
-/* Cart Sidebar */
-.cart-sidebar {
-    position: fixed;
-    top: 0;
-    right: -420px;
-    width: 380px;
-    height: 100vh;
-    background-color: #fff;
-    box-shadow: -10px 0 30px rgba(0,0,0,0.15);
-    transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
-}
-
-.cart-sidebar.active {
-    right: 0;
-}
-
-.cart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 20px;
-}
-
-.cart-header h3 {
-    font-family: 'Cinzel', serif;
-    font-size: 16px;
-    letter-spacing: 2px;
-}
-
-.close-btn {
-    font-size: 26px;
-    cursor: pointer;
-    color: #888;
-}
-
-.cart-items {
-    flex-grow: 1;
-    overflow-y: auto;
-    margin: 20px 0;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #f9f9f9;
-}
-
-.empty-msg {
-    text-align: center;
-    color: #999;
-    margin-top: 60px;
-    font-size: 12px;
-    letter-spacing: 1px;
-}
-
-.cart-footer {
-    border-top: 1px solid #eee;
-    padding-top: 20px;
-}
-
-.total-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-.total-row h4 {
-    color: #c5a059;
-    font-size: 18px;
-}
-
-.checkout-btn {
-    width: 100%;
-    padding: 15px;
-    background-color: #25d366;
+.admin-form button {
+    background-color: #1a1a1a;
     color: white;
     border: none;
-    font-size: 11px;
+    cursor: pointer;
     letter-spacing: 2px;
     text-transform: uppercase;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
 }
 
-/* Floating WhatsApp Button */
+.admin-form button:hover {
+    background-color: #d4af37;
+    color: black;
+}
+
+/* ==========================================
+   7. FLOATING WHATSAPP BUTTON
+   ========================================== */
 .whatsapp-float {
     position: fixed;
     bottom: 30px;
@@ -415,22 +274,53 @@ body {
 
 .whatsapp-float:hover {
     transform: scale(1.1);
-}/* Mobile Header Fix */
+}
+
+/* ==========================================
+   8. MOBILE RESPONSIVE FIX (PERFECT LAYOUT)
+   ========================================== */
 @media screen and (max-width: 768px) {
+    .announcement-bar {
+        font-size: 9px !important;
+        padding: 6px 10px !important;
+    }
+
     .navbar {
         flex-direction: column !important;
         align-items: center !important;
-        padding: 12px 10px !important;
-        gap: 10px !important;
+        padding: 15px 10px !important;
+        gap: 12px !important;
     }
+
     .nav-links {
         display: flex !important;
         flex-wrap: wrap !important;
         justify-content: center !important;
         gap: 12px !important;
+        width: 100% !important;
     }
+
     .nav-links a {
         font-size: 11px !important;
         margin: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    .hero h1 {
+        font-size: 32px !important;
+        letter-spacing: 2px !important;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .whatsapp-float {
+        bottom: 20px;
+        left: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 22px;
     }
 }
