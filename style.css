@@ -415,4 +415,22 @@ body {
 
 .whatsapp-float:hover {
     transform: scale(1.1);
+}/* Mobile Header Fix */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 12px 10px !important;
+        gap: 10px !important;
+    }
+    .nav-links {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 12px !important;
+    }
+    .nav-links a {
+        font-size: 11px !important;
+        margin: 0 !important;
+    }
 }
