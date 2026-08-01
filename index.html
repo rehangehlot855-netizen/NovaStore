@@ -3,75 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVA STORE - High Fashion & Luxury</title>
-    <!-- Luxury Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Nova Store - Luxury & Designer Wear</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
+        body { background-color: #ffffff; color: #111; }
+        
+        .top-bar { background-color: #0b0b0b; color: #ffffff; text-align: center; font-size: 11px; letter-spacing: 1px; padding: 8px 10px; font-weight: 600; }
+        header { background: #ffffff; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eaeaea; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 30px; font-style: italic; font-weight: 600; letter-spacing: 1px; color: #111; text-decoration: none; }
+        .header-right { display: flex; align-items: center; gap: 15px; }
+        .cart-btn { background: #111; color: #fff; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; display: flex; align-items: center; gap: 6px; }
+        .admin-toggle-btn { background: transparent; border: 1px solid #ccc; padding: 6px 10px; font-size: 11px; cursor: pointer; border-radius: 4px; }
+        
+        .promo-banner { background: #fdf5d8; border-bottom: 1px solid #e6d7a0; padding: 25px 20px; text-align: center; }
+        .promo-banner h2 { font-family: 'Playfair Display', serif; font-size: 32px; font-style: italic; margin-bottom: 5px; }
+        .promo-banner p { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #555; }
+        .promo-banner h3 { font-family: 'Cinzel', serif; font-size: 18px; font-weight: 700; margin-top: 10px; letter-spacing: 3px; color: #111; }
+
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        
+        .admin-box { background: #fafafa; padding: 25px; border: 1px solid #e0e0e0; margin-bottom: 30px; border-radius: 8px; display: none; }
+        .admin-box h3 { font-size: 14px; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; color: #b8860b; }
+        .admin-form { display: flex; flex-direction: column; gap: 12px; }
+        .admin-form input, .admin-form button { padding: 12px 14px; font-size: 13px; border: 1px solid #ccc; outline: none; border-radius: 4px; }
+        .admin-form button { background: #b8860b; color: #fff; font-weight: 700; border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+
+        .section-title { text-align: center; font-family: 'Cinzel', serif; font-size: 22px; letter-spacing: 4px; margin-bottom: 30px; margin-top: 20px; }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
+        .product-card { background: white; border: 1px solid #f0f0f0; border-radius: 6px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-image-wrap { width: 100%; height: 350px; overflow: hidden; background: #f9f9f9; margin-bottom: 12px; border-radius: 4px; }
+        .product-image { width: 100%; height: 100%; object-fit: cover; }
+        .product-title { font-size: 14px; margin-bottom: 6px; color: #222; font-weight: 600; }
+        .product-price { font-size: 15px; font-weight: 700; color: #b8860b; margin-bottom: 12px; }
+        
+        .btn-group { display: flex; gap: 8px; flex-direction: column; }
+        .btn-add-cart { padding: 10px; background: #222; color: #fff; border: none; cursor: pointer; text-transform: uppercase; font-size: 11px; font-weight: 600; border-radius: 4px; width: 100%; }
+        .btn-order-now { padding: 10px; background: #b8860b; color: #fff; border: none; cursor: pointer; text-transform: uppercase; font-size: 11px; font-weight: 700; border-radius: 4px; width: 100%; text-align: center; }
+        .btn-delete { background: none; border: none; color: #cc0000; font-size: 10px; cursor: pointer; text-decoration: underline; margin-top: 8px; text-align: center; }
+
+        /* Modal Popups styling */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; padding: 15px; }
+        .modal-box { background: #fff; width: 100%; max-width: 420px; padding: 25px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative; max-height: 90vh; overflow-y: auto; }
+        .modal-close { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 18px; cursor: pointer; }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px; text-transform: uppercase; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; }
+        .location-btn { background: #eee; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; cursor: pointer; border-radius: 4px; width: 100%; margin-top: 5px; font-weight: 600; }
+        
+        .action-btn { width: 100%; padding: 12px; background: #111; color: #fff; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
+        
+        /* QR Code Container */
+        .qr-container { text-align: center; }
+        .qr-box { width: 200px; height: 200px; margin: 15px auto; border: 1px solid #ddd; padding: 10px; background: #f9f9f9; display: flex; align-items: center; justify-content: center; }
+        .qr-box img { width: 100%; height: 100%; object-fit: contain; }
+    </style>
 </head>
 <body>
 
-    <!-- Top Announcement Bar -->
-    <div class="top-bar">
-        COMPLIMENTARY EXPRESS SHIPPING ACROSS KSA | EXCLUSIVE ATELIER COLLECTION
-    </div>
+    <div class="top-bar">🚨 NO EXCHANGE / NO RETURN / NO CANCELLATION</div>
 
-    <!-- Header / Navbar -->
-    <header class="navbar">
-        <div class="logo">NOVA <span>STORE</span></div>
-        <nav class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#products">Collection</a>
-            <a href="#admin">Add Product</a>
-        </nav>
-        <div class="header-icons">
-            <div class="cart-icon" onclick="toggleCart()">
-                <i class="fa-solid fa-bag-shopping"></i>
-                <span class="cart-count" id="cart-count">0</span>
-            </div>
+    <header>
+        <a href="#" class="logo">Nova Store</a>
+        <div class="header-right">
+            <button class="admin-toggle-btn" onclick="toggleAdmin()">⚙️ Admin</button>
+            <button class="cart-btn" onclick="toggleCartModal()">🛒 Cart (<span id="cartCount">0</span>)</button>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <p>AUTUMN / WINTER 2026</p>
-        <h1>HAUTE COUTURE</h1>
-        <a href="#products" class="btn-hero">Explore The Selection</a>
-    </section>
+    <div class="promo-banner">
+        <h2>Nova Store</h2>
+        <p>✦ LUXURY & HIGH QUALITY ✦ 100% ORIGINAL ✦</p>
+        <h3>THE PERFECT WORLDWIDE COLLECTION</h3>
+    </div>
 
-    <!-- Products Section -->
-    <section id="products" class="products-section">
-        <h2 class="section-title">Curated Collection</h2>
-        <div class="product-grid" id="product-grid">
-            <!-- Products will load dynamically via JS -->
-        </div>
-    </section>
-
-    <!-- Admin Section -->
-    <section id="admin" class="admin-section">
-        <div class="admin-card">
-            <h2>Add Exclusive Item</h2>
-            <p class="admin-subtitle">Catalog Management</p>
-            <form id="add-product-form" class="admin-form">
-                <input type="text" id="p-title" placeholder="Product Title (e.g. Royal Silk Kaftan)" required>
-                <input type="number" id="p-price" placeholder="Price in SAR" required>
-                <input type="url" id="p-image" placeholder="Image URL (Unsplash / Web link)" required>
-                <button type="submit" class="btn-publish">Publish To Store</button>
+    <div class="container">
+        <div class="admin-box" id="adminBox">
+            <h3>Add New Product (Admin Panel)</h3>
+            <form id="productForm" class="admin-form">
+                <input type="text" id="prodTitle" placeholder="Product Name / Description" required>
+                <input type="number" id="prodPrice" placeholder="Price in SAR" required>
+                <input type="url" id="prodImageUrl" placeholder="Direct Image URL (e.g. https://...)" required>
+                <button type="submit">Publish Item</button>
             </form>
         </div>
-    </section>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/966500000000" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+        <h2 class="section-title">NEW ARRIVALS</h2>
+        <div class="product-grid" id="productGrid"></div>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 NOVA STORE. All Rights Reserved.</p>
-    </footer>
+    <!-- 1. Cart Modal -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="toggleCartModal()">✕</button>
+            <h3 style="margin-bottom: 15px; font-family:'Cinzel', serif;">Your Shopping Cart</h3>
+            <div id="cartItemsContainer" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
+            <div style="display:flex; justify-content:space-between; font-weight:bold; border-top: 1px solid #eee; padding-top: 10px; margin-bottom: 15px;">
+                <span>Total Amount:</span>
+                <span id="cartTotal">0 SAR</span>
+            </div>
+            <button class="action-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
 
-    <script src="script.js"></script>
+    <!-- 2. Customer Details Form Modal -->
+    <div class="modal-overlay" id="detailsModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeDetailsModal()">✕</button>
+            <h3 style="margin-bottom: 15px; font-family:'Cinzel', serif;">Enter Delivery Details</h3>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="custName" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label>WhatsApp Number</label>
+                <input type="tel" id="custPhone" placeholder="e.g. +966 50 000 0000" required>
+            </div>
+            <div class="form-group">
+                <label>Delivery Address</label>
+                <textarea id="custAddress" rows="3" placeholder="Street, Building, City..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Live Location</label>
+                <button type="button" class="location-btn" onclick="getLocation()">📍 Fetch & Share Current Location</button>
+                <p id="locationStatus" style="font-size: 11px; color: #666; margin-top: 4px;"></p>
+            </div>
+            <button class="action-btn" onclick="submitDetailsAndPay()">Proceed to Bank Payment</button>
+        </div>
+    </div>
+
+    <!-- 3. Bank QR Payment Modal -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-box qr-container">
+            <button class="modal-close" onclick="closePaymentModal()">✕</button>
+            <h3 style="font-family:'Cinzel', serif; margin-bottom: 5px;">Scan & Pay</h3>
+            <p style="font-size: 12px; color: #666;">Scan QR via your banking app to complete payment</p>
+            <h2 id="paymentAmountDisplay" style="color: #b8860b; margin: 10px 0;">0 SAR</h2>
+            
+            <div class="qr-box">
+                <!-- ⚠️ Yahan aap apne Bank QR ka Image URL daal sakte hain -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=NovaStoreBankPayment" alt="Bank QR Code">
+            </div>
+            <p style="font-size: 11px; color: #444; margin-bottom: 15px;">Account Name: Nova Store Designer Wear<br>IBAN: SA00 0000 0000 0000 0000 00</p>
+            
+            <button class="action-btn" style="background: #25d366;" onclick="confirmOrderSuccess()">I Have Paid ✓ Confirm Order</button>
+        </div>
+    </div>
+
+    <!-- 4. Success Confirmation Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-box" style="text-align: center; padding: 35px 25px;">
+            <div style="font-size: 50px; margin-bottom: 10px;">🎉</div>
+            <h2 style="font-family:'Cinzel', serif; color: #2e7d32; margin-bottom: 10px;">Order Placed Successfully!</h2>
+            <p style="font-size: 13px; color: #555; line-height: 1.5; margin-bottom: 20px;">Thank you for shopping with Nova Store. Your payment verification is underway, and your order will be shipped shortly.</p>
+            <button class="action-btn" onclick="location.reload()">Back to Store</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let customerLocation = "Not Provided";
+        let checkoutItemSingle = null; // Direct single item order support
+
+        window.addEventListener('DOMContentLoaded', loadProducts);
+
+        function getStoredProducts() {
+            const stored = localStorage.getItem('nova_store_products');
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function loadProducts() {
+            const products = getStoredProducts();
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            if (products.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#888; padding:30px;">No products published yet.</p>';
+                return;
+            }
+
+            products.forEach((p, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div>
+                        <div class="product-image-wrap">
+                            <img src="${p.image}" class="product-image" alt="${p.title}" onerror="this.src='https://via.placeholder.com/400x500?text=Image+Load+Failed'">
+                        </div>
+                        <h3 class="product-title">${p.title}</h3>
+                        <p class="product-price">${p.price} SAR</p>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn-add-cart" onclick="addToCart('${p.title}', ${p.price})">🛒 Add To Cart</button>
+                        <button class="btn-order-now" onclick="buyNowSingle('${p.title}', ${p.price})">⚡ Order Now</button>
+                        <button class="btn-delete" onclick="deleteProduct(${index})">Remove Item</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        /* Cart Management */
+        function addToCart(title, price) {
+            cart.push({ title, price });
+            updateCartUI();
+            alert(`Added "${title}" to cart! 🛒`);
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').innerText = cart.length;
+            const container = document.getElementById('cartItemsContainer');
+            const totalEl = document.getElementById('cartTotal');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:#888; padding:20px;">Cart is empty.</p>';
+                totalEl.innerText = '0 SAR';
+                return;
+            }
+
+            container.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, idx) => {
+                total += Number(item.price);
+                container.innerHTML += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f2f2f2; font-size: 13px;">
+                        <div><b>${item.title}</b><br><span style="color:#b8860b;">${item.price} SAR</span></div>
+                        <button onclick="removeFromCart(${idx})" style="color:red; background:none; border:none; cursor:pointer;">✕</button>
+                    </div>
+                `;
+            });
+            totalEl.innerText = `${total} SAR`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        /* Direct Order Now Click */
+        function buyNowSingle(title, price) {
+            checkoutItemSingle = [{ title, price }];
+            document.getElementById('cartModal').style.display = 'none';
+            document.getElementById('detailsModal').style.display = 'flex';
+        }
+
+        function proceedToCheckout() {
+            if (cart.length === 0) return alert('Your cart is empty!');
+            checkoutItemSingle = null; // Use full cart
+            document.getElementById('cartModal').style.display = 'none';
+            document.getElementById('detailsModal').style.display = 'flex';
+        }
+
+        function closeDetailsModal() {
+            document.getElementById('detailsModal').style.display = 'none';
+        }
+
+        /* Geolocation Handler */
+        function getLocation() {
+            const status = document.getElementById('locationStatus');
+            if (!navigator.geolocation) {
+                status.innerText = "Geolocation is not supported by your browser";
+                return;
+            }
+            status.innerText = "Locating...";
+            navigator.geolocation.getCurrentPosition((position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                customerLocation = `Lat: ${lat}, Lon: ${lon} (Google Maps: https://maps.google.com/?q=${lat},${lon})`;
+                status.innerText = "✓ Location captured successfully!";
+                status.style.color = "green";
+            }, () => {
+                status.innerText = "Unable to retrieve your location. Please type address clearly.";
+                status.style.color = "red";
+            });
+        }
+
+        /* Submit Details and Open QR Payment */
+        function submitDetailsAndPay() {
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            if (!name || !phone || !address) {
+                alert("Please fill in all delivery details!");
+                return;
+            }
+
+            // Calculate total price
+            let itemsToProcess = checkoutItemSingle || cart;
+            let total = itemsToProcess.reduce((sum, item) => sum + Number(item.price), 0);
+
+            document.getElementById('paymentAmountDisplay').innerText = `${total} SAR`;
+            document.getElementById('detailsModal').style.display = 'none';
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        function confirmOrderSuccess() {
+            document.getElementById('paymentModal').style.display = 'none';
+            document.getElementById('successModal').style.display = 'flex';
+            // Clear cart after successful order
+            cart = [];
+            updateCartUI();
+        }
+
+        /* Admin Controls */
+        function toggleAdmin() {
+            const pwd = prompt("Enter Admin Password:");
+            if (pwd === "nova123") {
+                const box = document.getElementById('adminBox');
+                box.style.display = box.style.display === 'block' ? 'none' : 'block';
+            } else if (pwd !== null) {
+                alert("❌ Wrong Password!");
+            }
+        }
+
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('prodTitle').value;
+            const price = document.getElementById('prodPrice').value;
+            let imageUrl = document.getElementById('prodImageUrl').value.trim();
+
+            const newProduct = { id: Date.now(), title, price, image: imageUrl };
+            const products = getStoredProducts();
+            products.unshift(newProduct);
+            
+            localStorage.setItem('nova_store_products', JSON.stringify(products));
+            alert("✅ Product Published Successfully!");
+            document.getElementById('productForm').reset();
+            loadProducts();
+        });
+
+        function deleteProduct(index) {
+            const pwd = prompt("Enter Admin Password to Delete:");
+            if (pwd === "nova123") {
+                const products = getStoredProducts();
+                products.splice(index, 1);
+                localStorage.setItem('nova_store_products', JSON.stringify(products));
+                loadProducts();
+            } else if(pwd !== null) {
+                alert("❌ Incorrect Password!");
+            }
+        }
+    </script>
 </body>
 </html>
